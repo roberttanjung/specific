@@ -9,6 +9,7 @@ SPEcific adalah sebuah Aplikasi Website yang digunakan untuk mengautomisasi pros
 - IT Development
 - HCGA
 - Prodev
+- IT Infrastructure Network & Security
 
 ## Section
 
@@ -44,6 +45,7 @@ SPEcific adalah sebuah Aplikasi Website yang digunakan untuk mengautomisasi pros
 - **Mongoose**: Library untuk memodelkan data MongoDB dalam aplikasi Node.js.
 - **Docker**: Platform untuk mengembangkan, mengirim, dan menjalankan aplikasi dalam container.
 - **Express**: Framework untuk membangun API backend.
+- **cron**: Alat untuk menjadwalkan tugas otomatis, seperti sinkronisasi data harian.
 
 ## Source Data
 
@@ -54,17 +56,28 @@ SPEcific adalah sebuah Aplikasi Website yang digunakan untuk mengautomisasi pros
 
 ## Rules
 
+- Semua Source Data akan disimpan ke DB dan dilakukan sinkronisasi setiap hari di jam 00:00
 - Setiap divisi memiliki KPI yang berbeda-beda
 - Setiap divisi memiliki department-department dengan Bare Minimum yang berbeda
 - Data dapat difilter berdasarkan tahun agar dapat melihat perkembangan anggota tim secara historikal
-- Sumber data Activity berbeda-beda untuk setiap divisi
-    - IT Development: SPEctrum, Click Up, dan GitLab
+- Sumber data Activity berbeda-beda untuk setiap divisi:
+  - User mampu mengisi aktifitas secara mandiri
+  - IT Development: SPEctrum, Click Up, dan GitLab
 
 ## Features
 
 - Login SSO dengan Microsoft
 - Memiliki fitur untuk merubah format penulisan agar lebih konsisten dan mudah dibaca.
-- KPI Generator untuk memudahkan pembuatan KPI berdasarkan format Excel yang sudah disediakan. Lalu, mengisi KPI tersebut secara otomatis dengan data yang diisi dengan AI.
+- KPI Generator untuk memudahkan pembuatan KPI berdasarkan format Excel yang sudah disediakan. Lalu, mengisi KPI tersebut secara otomatis dengan data yang diisi AI.
+
+## Role Akses
+
+- Head:
+  - Dapat membuat KPI
+  - Dapat membuat Bare Minimum
+- SPV:
+  - Dapat mengisi KPI
+  - Dapat mengisi Bare Minimum
 
 ## Questions
 
