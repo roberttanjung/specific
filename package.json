@@ -1,7 +1,11 @@
 {
-  "name": "app.specific",
+  "name": "SPEcific",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "email": "robert.tanjung@spesolution.com",
+    "name": "Robert Tanjung"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
