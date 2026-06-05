@@ -6,10 +6,16 @@ SPEcific adalah sebuah Aplikasi Website yang digunakan untuk mengautomisasi pros
 
 ## Daftar Divisi
 
+
 - IT Development
+- Product Development
+- Business & Relationship
+- FAT
+- Compliance & Audit
 - HCGA
-- Prodev
-- IT Infrastructure Network & Security
+- Research & Development
+- IT Infrastructure, Network, and Security
+- BOD/Management
 
 ## Section
 
@@ -68,7 +74,9 @@ SPEcific adalah sebuah Aplikasi Website yang digunakan untuk mengautomisasi pros
 
 - Login SSO dengan Microsoft
 - Memiliki fitur untuk merubah format penulisan agar lebih konsisten dan mudah dibaca.
-- KPI Generator untuk memudahkan pembuatan KPI berdasarkan format Excel yang sudah disediakan. Lalu, mengisi KPI tersebut secara otomatis dengan data yang diisi AI.
+- Dark Mode untuk memberikan pengalaman pengguna yang lebih nyaman, terutama saat bekerja dalam kondisi pencahayaan rendah.
+- Dapat membuat KPI secara dinamis sesuai dengan kebutuhan divisi atau department.
+- Dapat membuat Bare Minimum secara dinamis sesuai dengan kebutuhan divisi atau department.
 
 ## Role Akses
 
