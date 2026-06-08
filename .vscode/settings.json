@@ -1,0 +1,20 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^npm install next-auth@beta react-hook-form @hookform/resolvers yup axios swr js-cookie @types/js-cookie$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^node -e \"const auth = require\\('next-auth'\\); console\\.log\\(Object\\.keys\\(auth\\)\\)\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^npx tsc --noEmit 2>&1 \\| Select-Object -First 60$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^Set-Content -Path \"d:\\\\Projects\\\\specific\\\\app\\.specific\\\\src\\\\app\\\\page\\.tsx\" -Value 'import \\{ redirect \\} from \"next/navigation\";\n\nexport default function Home\\(\\) \\{\n  redirect\\(\"/users\"\\);\n\\}'$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}
