@@ -2,19 +2,18 @@
 
 ## Introduction
 
-SPEcific adalah sebuah Aplikasi Website yang digunakan untuk mengautomisasi proses pekerjaan para Leaders seperti: profiling, roadmap, hingga KPI Management.
+SPEcific adalah sebuah Aplikasi Website yang digunakan untuk mengautomisasi proses pekerjaan para Leaders seperti: profiling, roadmap, KPI, form / performance review, hingga performance appraisal.
 
 ## Daftar Divisi
 
-
 - IT Development
+- HCGA
 - Product Development
+- Research & Development
+- IT Infrastructure, Network, and Security
 - Business & Relationship
 - FAT
 - Compliance & Audit
-- HCGA
-- Research & Development
-- IT Infrastructure, Network, and Security
 - BOD/Management
 
 ## Section
@@ -25,13 +24,17 @@ SPEcific adalah sebuah Aplikasi Website yang digunakan untuk mengautomisasi pros
 - Aspek Profile
 - Kelebihan
 - Butuh Ditingkatkan
-- Roadmap
+- Roadmap: Tahap-tahapan yang harus dilalui dalam bentuk Gantt Chart.
 
 ### Bersifat berbeda
 
 - Activity
 - Bare Minimum
 - Performa
+
+#### Activity
+
+- IT Development: SPEctrum, Click Up, dan GitLab
 
 ## Tech Stack
 
@@ -94,3 +97,7 @@ SPEcific adalah sebuah Aplikasi Website yang digunakan untuk mengautomisasi pros
 A: Penggunaan App ini merupakan bagian dari proses digitalisasi yang sedang dilakukan oleh perusahaan. Apakah KPI akan menyesuaikan untuk digitalisasikan?
 
 B: -
+
+## Takeaways
+
+- Sesuaikan file-file yang ada di .github setiap ada perubahan response AI
