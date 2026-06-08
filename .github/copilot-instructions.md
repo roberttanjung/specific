@@ -2,9 +2,9 @@
 
 ## Introduction
 
-SPEcific adalah sebuah Aplikasi Website yang digunakan untuk mengautomisasi proses pekerjaan para Leaders seperti: profiling, roadmap, KPI, form / performance review, hingga performance appraisal.
+SPEcific is a App Web that is used to automate the work process of Leaders such as: profiling, roadmap, KPI, form / performance review, and performance appraisal.
 
-## Daftar Divisi
+## List of Divisions
 
 - IT Development
 - HCGA
@@ -16,103 +16,103 @@ SPEcific adalah sebuah Aplikasi Website yang digunakan untuk mengautomisasi pros
 - Compliance & Audit
 - BOD/Management
 
-## Section
+## Sections
 
-### Bersifat sama
+### Similar
 
 - Bio
-- Aspek Profile
-- Kelebihan
-- Butuh Ditingkatkan
-- Roadmap: Tahap-tahapan yang harus dilalui dalam bentuk Gantt Chart.
+- Profile Aspects
+- Strengths
+- Areas for Improvement
+- Roadmap: The stages that must be passed in the form of a Gantt Chart.
 
-### Bersifat berbeda
+### Different
 
 - Activity
 - Bare Minimum
-- Performa
+- Performance
 
 #### Activity
 
-- IT Development: SPEctrum, Click Up, dan GitLab
+- IT Development: SPEctrum, Click Up, and GitLab
 
 ## Tech Stack
 
-- **Next JS v16**: Framework utama untuk membangun aplikasi web.
+- **Next JS v16**: Primary Framework for building web applications.
 - **Tailwind v4**: CSS Preprocessor.
-- **TypeScript**: Bahasa pemrograman yang digunakan untuk meningkatkan kualitas kode.
-- **ESLint**: Alat untuk memastikan konsistensi kode.
-- **Prettier**: Alat untuk memastikan format kode yang konsisten.
-- **Jest**: Framework untuk pengujian unit.
-- **React Testing Library**: Alat untuk pengujian komponen React.
-- **Storybook**: Alat untuk mengembangkan dan mendokumentasikan komponen UI.
-- **React Hook Form**: Library untuk mengelola form dalam aplikasi React.
-- **Yup**: Library untuk validasi skema data.
-- **Axios**: Library untuk melakukan HTTP requests.
-- **SWR**: Library untuk data fetching.
-- **MongoDB**: Database NoSQL yang digunakan untuk menyimpan data aplikasi.
-- **Mongoose**: Library untuk memodelkan data MongoDB dalam aplikasi Node.js.
-- **Docker**: Platform untuk mengembangkan, mengirim, dan menjalankan aplikasi dalam container.
-- **Express**: Framework untuk membangun API backend.
-- **cron**: Alat untuk menjadwalkan tugas otomatis, seperti sinkronisasi data harian.
+- **TypeScript**: Programming language used to improve code quality.
+- **ESLint**: Tool to ensure code consistency.
+- **Prettier**: Tool to ensure consistent code formatting.
+- **Jest**: Framework for unit testing.
+- **React Testing Library**: Tool for testing React components.
+- **Storybook**: Tool for developing and documenting UI components.
+- **React Hook Form**: Library for managing forms in React applications.
+- **Yup**: Library for data schema validation.
+- **Axios**: Library for making HTTP requests.
+- **SWR**: Library for data fetching.
+- **MongoDB**: NoSQL database used to store application data.
+- **Mongoose**: Library for modeling MongoDB data in Node.js applications.
+- **Docker**: Platform for developing, shipping, and running applications in containers.
+- **Express**: Framework for building backend APIs.
+- **cron**: Tool for scheduling automated tasks, such as daily data synchronization.
 
 ## Source Data
 
-- SPEInside: Mendapatkan sesi data berupa posisi, divisi, dan department
+- SPEInside: Retrieves session data such as position, division, and department
 - Click Up
 - GitLab
 - SPEctrum
 
 ## Rules
 
-- Semua Source Data akan disimpan ke DB dan dilakukan sinkronisasi setiap hari di jam 00:00
-- Setiap divisi memiliki KPI yang berbeda-beda
-- Setiap divisi memiliki department-department dengan Bare Minimum yang berbeda
-- Data dapat difilter berdasarkan tahun agar dapat melihat perkembangan anggota tim secara historikal
-- Sumber data Activity berbeda-beda untuk setiap divisi:
-  - User mampu mengisi aktifitas secara mandiri
-  - IT Development: SPEctrum, Click Up, dan GitLab
+- All Source Data will be stored in the DB and synchronized daily at 00:00
+- Each division has different KPIs
+- Each division has departments with different Bare Minimums
+- Data can be filtered by year to view the historical development of team members
+- Activity source data varies for each division:
+  - Users can fill in activities independently
+  - IT Development: SPEctrum, Click Up, and GitLab
 
 ## Features
 
-- Login SSO dengan Microsoft
-- Memiliki fitur untuk merubah format penulisan agar lebih konsisten dan mudah dibaca.
-- Dark Mode untuk memberikan pengalaman pengguna yang lebih nyaman, terutama saat bekerja dalam kondisi pencahayaan rendah.
-- Dapat membuat KPI secara dinamis sesuai dengan kebutuhan divisi atau department.
-- Dapat membuat Bare Minimum secara dinamis sesuai dengan kebutuhan divisi atau department.
+- Login SSO with Microsoft
+- Has a feature to change the writing format to be more consistent and easier to read.
+- Dark Mode to provide a more comfortable user experience, especially when working in low light conditions.
+- Can create KPIs dynamically according to the needs of the division or department.
+- Can create Bare Minimums dynamically according to the needs of the division or department.
 
-## Role Akses
+## User Status
+
+- 0: Inactive / Deleted
+- 1: The Division nor The Department isn't assigned yet
+- 2: Active
+
+## Roles
+
+- Superadmin: Has access to all features.
+
+## Access
 
 - Head:
-  - Dapat membuat KPI
-  - Dapat membuat Bare Minimum
+  - Can create KPIs
+  - Can create Bare Minimums
 - SPV:
-  - Dapat mengisi KPI
-  - Dapat mengisi Bare Minimum
-
-## Questions
-
-### Digitalisasi
-
-A: Penggunaan App ini merupakan bagian dari proses digitalisasi yang sedang dilakukan oleh perusahaan. Apakah KPI akan menyesuaikan untuk digitalisasikan?
-
-B: -
-
-
+  - Can fill in KPIs
+  - Can fill in Bare Minimums
 
 ## Structure
 
-- `src/app`: Folder utama untuk halaman
-- `src/components`: Folder untuk komponen UI yang bisa digunakan ulang
-- `src/utils`: Folder untuk utilitas dan helper functions yang bisa digunakan di berbagai tempat
-- `src/views`: Folder untuk komponen yang spesifik untuk halaman tertentu agar lebih terorganisir
+- `src/app`: Main folder for pages
+- `src/components`: Folder for reusable UI components
+- `src/utils`: Folder for utilities and helper functions that can be used in various places
+- `src/views`: Folder for components specific to certain pages for better organization
 
 ## Style Guide
 
-- Gunakan camelCase untuk penamaan variabel dan fungsi
-- Gunakan PascalCase untuk penamaan komponen React
-- Gunakan kebijakan single responsibility principle untuk komponen, pastikan setiap komponen hanya memiliki satu tanggung jawab
-- Hindari nested components yang terlalu dalam, usahakan untuk memecahnya menjadi komponen yang lebih kecil jika diperlukan
+- Use camelCase for variable and function names
+- Use PascalCase for React component names
+- Follow the single responsibility principle for components, ensuring each component has only one responsibility
+- Avoid deeply nested components, try to break them into smaller components if necessary
 - Nested hanya 1 level, jika lebih dari itu, pertimbangkan untuk memecahnya menjadi komponen yang lebih kecil
 
 ### Example
@@ -154,4 +154,4 @@ src/
 
 ## Takeaways
 
-- Sesuaikan file-file yang ada di .github setiap ada perubahan response AI
+- Adjust the files in .github whenever there are changes in AI responses.
