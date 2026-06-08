@@ -98,6 +98,60 @@ A: Penggunaan App ini merupakan bagian dari proses digitalisasi yang sedang dila
 
 B: -
 
+
+
+## Structure
+
+- `src/app`: Folder utama untuk halaman
+- `src/components`: Folder untuk komponen UI yang bisa digunakan ulang
+- `src/utils`: Folder untuk utilitas dan helper functions yang bisa digunakan di berbagai tempat
+- `src/views`: Folder untuk komponen yang spesifik untuk halaman tertentu agar lebih terorganisir
+
+## Style Guide
+
+- Gunakan camelCase untuk penamaan variabel dan fungsi
+- Gunakan PascalCase untuk penamaan komponen React
+- Gunakan kebijakan single responsibility principle untuk komponen, pastikan setiap komponen hanya memiliki satu tanggung jawab
+- Hindari nested components yang terlalu dalam, usahakan untuk memecahnya menjadi komponen yang lebih kecil jika diperlukan
+- Nested hanya 1 level, jika lebih dari itu, pertimbangkan untuk memecahnya menjadi komponen yang lebih kecil
+
+### Example
+
+#### Folder Structure
+
+src/
+├── app/
+│ ├── dashboard/
+│ │ ├── page.tsx
+│ └── profile/
+│ | ├── page.tsx
+├── views/
+│ ├── Dashboard/
+│ │ ├── Dashboard.tsx
+│ │ ├── Dashboard.module.css
+│ │ ├── Dashboard.types.ts
+│ │ └── index.ts
+│ └── Profile/
+│ ├── Profile.tsx
+│ ├── Profile.module.css
+│ ├── Profile.types.ts
+│ └── index.ts
+├── components/
+│ ├── Button/
+│ │ ├── Button.tsx
+│ │ ├── Button.module.css
+│ │ ├── Button.types.ts
+│ │ └── index.ts
+│ └── Card/
+│ ├── Card.tsx
+│ ├── Card.module.css
+│ ├── Card.types.ts
+│ └── index.ts
+├── utils/
+│ ├── api.ts
+│ ├── constants.ts
+│ └── helpers.ts
+
 ## Takeaways
 
 - Sesuaikan file-file yang ada di .github setiap ada perubahan response AI
