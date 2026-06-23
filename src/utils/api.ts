@@ -1,10 +1,81 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import { API_BASE_URL } from "@/utils/constants";
 
-const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "/api",
+export interface ApiError extends Error {
+  status?: number;
+  code?: string;
+  details?: unknown;
+}
+
+const apiClient = axios.create({
+  baseURL: API_BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
+  timeout: 10000,
+  withCredentials: true,
 });
 
-export default api;
+apiClient.interceptors.request.use((config) => {
+  if (typeof window !== "undefined") {
+    const token = window.localStorage.getItem("appToken");
+    if (token && config.headers) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+  }
+  return config;
+});
+
+const createApiError = (error: unknown): ApiError => {
+  const apiError = new Error("An unexpected error occurred") as ApiError;
+
+  if (error instanceof AxiosError) {
+    apiError.message = error.response?.data?.message ?? error.message;
+    apiError.status = error.response?.status;
+    apiError.code = error.code;
+    apiError.details = error.response?.data?.details ?? error.toJSON();
+    return apiError;
+  }
+
+  if (error instanceof Error) {
+    apiError.message = error.message;
+    return apiError;
+  }
+
+  return apiError;
+};
+
+export const fetcher = async <T>(url: string): Promise<T> => {
+  try {
+    const response = await apiClient.get<T>(url);
+    return response.data;
+  } catch (error) {
+    throw createApiError(error);
+  }
+};
+
+export const getJson = async <T>(url: string): Promise<T> => {
+  try {
+    const response = await apiClient.get<T>(url);
+    return response.data;
+  } catch (error) {
+    throw createApiError(error);
+  }
+};
+
+export const postJson = async <T = void, R = void>(url: string, payload?: T): Promise<R> => {
+  try {
+    const response = await apiClient.post<R>(url, payload);
+    return response.data;
+  } catch (error) {
+    throw createApiError(error);
+  }
+};
+
+export const getErrorMessage = (error: unknown, defaultMessage = "Something went wrong") => {
+  if (error instanceof Error) {
+    return error.message || defaultMessage;
+  }
+
+  return defaultMessage;
+};

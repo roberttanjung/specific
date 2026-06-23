@@ -2,6 +2,8 @@
 
 ## Agents
 
+database-agent: DatabaseAgent
+
 ## Purpose
 
 This agent specifically manages an intuitive interface while ensuring reusable components that are efficient and consistent.
