@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect } from "react";
+import { createContext, useContext } from "react";
 import useSWR from "swr";
 import { fetcher } from "@/utils/api";
 import { ROUTES } from "@/utils/constants";

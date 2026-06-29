@@ -1,27 +1,27 @@
-# Prompt: Main PR
+# Prompt: PR Utama
 
-## Objective
+## Tujuan
 
-Setup main configuration for the App, including Tech Stack.
+Siapkan konfigurasi utama aplikasi, termasuk Tumpukan Teknologi.
 
-## Tasks
+## Tugas
 
-[ ] Setup every Tech Stack as requirement
-[ ] Create best practices for requesting data from the backend
-[ ] Create best practices for handling data in the frontend
-[ ] Create best practices for handling errors in the frontend
-[ ] Create best practices for handling errors in the backend
-[ ] Create best practices for handling authentication and authorization
-[ ] Create best practices for handling state management
-[ ] Create best practices for handling routing
-[ ] Create best practices for handling forms
-[ ] Create best practices for handling validation
-[ ] Create best practices for handling testing
-[ ] Create best practices for handling deployment
-[ ] Create best practices for handling CI/CD
-[ ] Create best practices for handling logging
-[ ] Create best practices for handling monitoring
-[ ] Create best practices for handling security
-[ ] Create best practices for handling performance
-[ ] Create best practices for handling scalability
-[ ] Create best practices for handling maintainability
+[ ] Siapkan setiap tumpukan teknologi sesuai kebutuhan
+[ ] Buat praktik terbaik untuk mengambil data dari backend
+[ ] Buat praktik terbaik untuk menangani data di frontend
+[ ] Buat praktik terbaik untuk menangani error di frontend
+[ ] Buat praktik terbaik untuk menangani error di backend
+[ ] Buat praktik terbaik untuk menangani autentikasi dan otorisasi
+[ ] Buat praktik terbaik untuk menangani manajemen state
+[ ] Buat praktik terbaik untuk menangani routing
+[ ] Buat praktik terbaik untuk menangani formulir
+[ ] Buat praktik terbaik untuk menangani validasi
+[ ] Buat praktik terbaik untuk menangani pengujian
+[ ] Buat praktik terbaik untuk menangani deployment
+[ ] Buat praktik terbaik untuk menangani CI/CD
+[ ] Buat praktik terbaik untuk menangani logging
+[ ] Buat praktik terbaik untuk menangani monitoring
+[ ] Buat praktik terbaik untuk menangani keamanan
+[ ] Buat praktik terbaik untuk menangani performa
+[ ] Buat praktik terbaik untuk menangani skalabilitas
+[ ] Buat praktik terbaik untuk menangani maintainability

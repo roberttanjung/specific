@@ -1,93 +1,93 @@
-# Prompt: User PR
+# Prompt: PR Pengguna
 
-## Objective
+## Tujuan
 
-Create User Management page.
+Buat halaman Manajemen Pengguna.
 
-## List User Page (Authenticated)
+## Halaman Daftar Pengguna (Terautentikasi)
 
-A List User page that shows list of users with Table view.
+Halaman daftar pengguna yang menampilkan daftar pengguna dalam tampilan tabel.
 
-The Table View will show this bellow:
+Tampilan tabel akan menampilkan hal-hal berikut:
 
-- Name
+- Nama
 - Email
-- Division
-- Department
+- Divisi
+- Departemen
 - Superintendent
 - Direct Report
-- Actions
+- Aksi
 
-**The Rules**:
+**Aturannya**:
 
-- Click on the empty space in row can inflict redirect to detail user
-- Hover on Email can inflict Icon Button for copy the email
+- Klik area kosong di baris dapat mengarahkan ke detail pengguna
+- Arahkan kursor ke Email dapat menampilkan tombol ikon untuk menyalin email
 
-### Actions
+### Aksi
 
-List of Actions that displays with Icon Button:
+Daftar aksi yang ditampilkan dengan tombol ikon:
 
-- Edit User: Redirect to Detail User
-- Delete User: Delete the user
+- Edit Pengguna: Arahkan ke Detail Pengguna
+- Hapus Pengguna: Hapus pengguna
 
-### Delete User
+### Hapus Pengguna
 
-Change the status of user turn into 0.
+Ubah status pengguna menjadi 0.
 
-**The flow**:
+**Alurnya**:
 
-- User click Delete User
-- Popup reminder shows up with 2 button options: No & Yes
-- User click No then the Popup reminder will be hid
-- User click Yes then the process will be inflicted
+- Pengguna klik Hapus Pengguna
+- Popup pengingat muncul dengan 2 pilihan tombol: Tidak & Ya
+- Pengguna klik Tidak maka popup pengingat akan hilang
+- Pengguna klik Ya maka proses akan dijalankan
 
-## Create / Detail / Update User page (Authenticated)
+## Halaman Buat / Detail / Perbarui Pengguna (Terautentikasi)
 
-A reuseable Pages for Create, Detail, and Update User.
+Halaman yang dapat digunakan kembali untuk Membuat, Melihat Detail, dan Memperbarui Pengguna.
 
-**The Rules**:
+**Aturannya**:
 
-- Direct Report can be selected as multiple
+- Direct Report dapat dipilih lebih dari satu
 
-**The Fields***:
+**Fieldnya**:
 
-- Name:
-  - type: Text
-  - validations:
-    - Required
+- Nama:
+  - tipe: Teks
+  - validasi:
+    - Wajib diisi
     - min: 4
     - max: 60
 - Email:
-  - type: Email
-  - validations:
-    - Required
+  - tipe: Email
+  - validasi:
+    - Wajib diisi
     - min: 4
     - max: 60
-- Division:
-  - type: Select
+- Divisi:
+  - tipe: Select
   - Enum:
     - IT Development
-  - validations:
-    - Required
-- Department:
-  - type: Select
+  - validasi:
+    - Wajib diisi
+- Departemen:
+  - tipe: Select
   - Enum:
     - Multiplatform
-  - validations:
-    - Required
+  - validasi:
+    - Wajib diisi
 - Superintendent:
-  - type: Autocomplete with endpoint
-  - Endpoint is used for get list Superintendent in the Division
-  - validations:
-    - Required
+  - tipe: Autocomplete dengan endpoint
+  - Endpoint digunakan untuk mengambil daftar Superintendent di Divisi tersebut
+  - validasi:
+    - Wajib diisi
     - min: 4
     - max: 60
 - Direct Report:
-  - type: Multiple Autocomplete with endpoint
-  - Endpoint is used for get list Member bellow the creator
+  - tipe: Multiple Autocomplete dengan endpoint
+  - Endpoint digunakan untuk mengambil daftar anggota di bawah pembuat
 
-## Tasks
+## Tugas
 
-[ ] Create Table View as reuseable component
-[ ] Create List User page
-[ ] Create Create / Detail / Update User page
+[ ] Buat tampilan tabel sebagai komponen yang dapat digunakan kembali
+[ ] Buat halaman daftar pengguna
+[ ] Buat halaman Buat / Detail / Perbarui Pengguna

@@ -1,9 +1,9 @@
 import { MongoClient, Db } from "mongodb";
 
-const uri = process.env.MONGODB_URI;
+const uri = process.env.NEXT_PUBLIC_MONGODB_URI;
 
 if (!uri) {
-  console.warn("MONGODB_URI is not defined. Database features will be disabled.");
+  console.warn("NEXT_PUBLIC_MONGODB_URI is not defined. Database features will be disabled.");
 }
 
 let cachedClient: MongoClient | null = null;
@@ -11,7 +11,7 @@ let cachedDb: Db | null = null;
 
 export const getDb = async (): Promise<Db> => {
   if (!uri) {
-    throw new Error("Missing MONGODB_URI environment variable");
+    throw new Error("Missing NEXT_PUBLIC_MONGODB_URI environment variable");
   }
 
   if (cachedDb && cachedClient) {

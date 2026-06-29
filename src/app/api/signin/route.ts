@@ -7,11 +7,6 @@ interface SignInBody {
   password: string;
 }
 
-interface SignInResponse {
-  email: string;
-  id_token: string;
-  name: string;
-}
 
 const decodeTokenPayload = (token: string): JwtPayload => {
   const payload = decodeJwt(token);

@@ -2,20 +2,20 @@
 
 ## Agents
 
-## Purpose
+## Tujuan
 
-This agent specifically manages Database operations using MongoDB.
+Agen ini khusus mengelola operasi basis data menggunakan MongoDB.
 
-## Information
+## Informasi
 
-- DB Connection Name: SPEcific
-- DB Name: SPEcific
+- Nama Koneksi DB: SPEcific
+- Nama DB: SPEcific
 
-## Collections
+## Koleksi
 
 ### users
 
-#### fields
+#### field
 
 - email: string
 - name: string
@@ -24,4 +24,4 @@ This agent specifically manages Database operations using MongoDB.
 - job_position: string
 - direct_report:
   - type: string[]
-  - description: email of the direct report users
+  - description: email pengguna yang menjadi direct report

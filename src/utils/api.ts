@@ -11,20 +11,14 @@ const apiClient = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     "Content-Type": "application/json",
+    "Origin": "https://lifeinspectrum.com"
   },
   timeout: 10000,
   withCredentials: true,
 });
 
-apiClient.interceptors.request.use((config) => {
-  if (typeof window !== "undefined") {
-    const token = window.localStorage.getItem("appToken");
-    if (token && config.headers) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-  }
-  return config;
-});
+// Rely on cookie-based authentication for requests. Avoid using localStorage
+// tokens here so the browser sends HttpOnly cookies set by the server.
 
 const createApiError = (error: unknown): ApiError => {
   const apiError = new Error("An unexpected error occurred") as ApiError;

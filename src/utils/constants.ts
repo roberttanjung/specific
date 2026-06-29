@@ -1,9 +1,10 @@
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "/api";
+export const API_BASE_URL = process.env.NEXT_PUBLIC_BASE_API ?? "";
 
 export const ROUTES = {
-  health: "/api/health",
-  currentUser: "/api/user",
-  formSubmit: "/api/form",
-  signIn: "/api/signin",
-  logout: "/api/logout",
+  health: "/health",
+  currentUser: "/user",
+  formSubmit: "/form",
+  googleSignIn: "/api/auth/google/signin",
+  googleCallback: "/api/auth/google/callback",
+  logout: "/logout",
 };
