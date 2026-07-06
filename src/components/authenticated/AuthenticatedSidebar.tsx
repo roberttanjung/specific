@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Box, Button, Divider, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
 const navItems = [
   { label: "Dashboard", href: "/dashboard" },

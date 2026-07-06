@@ -23,7 +23,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import UserTable, { UserRecord } from "@/components/UserTable";
+import { UserRecord } from "@/components/UserTable";
 
 const initialUsers: UserRecord[] = [
   {
@@ -79,15 +79,6 @@ export default function AuthenticatedUserPage() {
     setUsers((current) => current.map((user) => (user.id === deleteTarget.id ? { ...user, status: 0 } : user)));
     setFeedback(`Pengguna ${deleteTarget.name} ditandai sebagai non-aktif.`);
     setDeleteTarget(null);
-  };
-
-  const copyEmail = async (email: string) => {
-    try {
-      await navigator.clipboard.writeText(email);
-      setFeedback(`Email ${email} berhasil disalin.`);
-    } catch {
-      setFeedback("Gagal menyalin email.");
-    }
   };
 
   return (

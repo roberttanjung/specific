@@ -1,8 +1,17 @@
 import { AuthUser } from "@/types";
-import { decodeJwt, isJwtExpired } from "@/lib/server/jwt";
+import { decodeJwt, isJwtExpired, verifyJwtSignature } from "@/lib/server/jwt";
 import { getCookieValue } from "@/utils/cookies";
 
 export const verifyAuthToken = (token: string): AuthUser => {
+  const jwtSecret = process.env.JWT_SECRET;
+  if (!jwtSecret) {
+    throw new Error("JWT_SECRET is not configured");
+  }
+
+  if (!verifyJwtSignature(token, jwtSecret)) {
+    throw new Error("Invalid token signature");
+  }
+
   const payload = decodeJwt(token);
 
   if (isJwtExpired(payload)) {

@@ -1,59 +1,55 @@
 import { jsonResponse, errorResponse } from "@/lib/server/response";
-import { decodeJwt, isJwtExpired, JwtPayload, encodeJwtPayload } from "@/lib/server/jwt";
-import { ensureUser } from "@/lib/server/user";
+import { signJwt } from "@/lib/server/jwt";
+import { findUserByEmail } from "@/lib/server/user";
+import bcrypt from "bcryptjs";
 
 interface SignInBody {
   email: string;
   password: string;
 }
 
-
-const decodeTokenPayload = (token: string): JwtPayload => {
-  const payload = decodeJwt(token);
-  if (isJwtExpired(payload)) {
-    throw new Error("Token expired");
-  }
-  return payload;
-};
-
-const createDummyJwt = (email: string, name: string) => {
-  const header = encodeJwtPayload({ alg: "HS256", typ: "JWT" });
-  const payload = encodeJwtPayload({
-    sub: email,
-    email,
-    name,
-    role: "user",
-    exp: Math.floor(Date.now() / 1000) + 3600,
-    iat: Math.floor(Date.now() / 1000),
-  });
-  return `${header}.${payload}.dummy-signature`;
-};
-
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as SignInBody;
+    const jwtSecret = process.env.JWT_SECRET;
+
+    if (!jwtSecret) {
+      return errorResponse("JWT_SECRET is not configured", 500);
+    }
 
     if (!body.email || !body.password) {
       return errorResponse("Email and password are required", 400);
     }
 
-    const id_token = createDummyJwt(body.email, "Demo User");
+    const user = await findUserByEmail(body.email);
+    if (!user || !user.passwordHash) {
+      return errorResponse("Invalid credentials", 401);
+    }
 
-    const tokenPayload = decodeTokenPayload(id_token);
+    const isPasswordValid = await bcrypt.compare(body.password, user.passwordHash);
+    if (!isPasswordValid) {
+      return errorResponse("Invalid credentials", 401);
+    }
 
-    await ensureUser({
-      id: tokenPayload.sub as string,
-      email: tokenPayload.email as string,
-      name: tokenPayload.name as string,
-      role: "user",
-    });
+    const token = signJwt(
+      {
+        sub: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+        exp: Math.floor(Date.now() / 1000) + 3600,
+        iat: Math.floor(Date.now() / 1000),
+      },
+      jwtSecret
+    );
 
+    const secureCookie = process.env.NODE_ENV === "production" ? "; Secure" : "";
     const headers = new Headers({
-      "Set-Cookie": `appToken=${encodeURIComponent(id_token)}; HttpOnly; Path=/; Max-Age=3600; SameSite=Lax`,
+      "Set-Cookie": `appToken=${encodeURIComponent(token)}; HttpOnly; Path=/; Max-Age=3600; SameSite=Lax${secureCookie}`,
     });
 
-    return jsonResponse({ success: true }, { headers });
+    return jsonResponse({ success: true, token }, { headers });
   } catch (error) {
-    return errorResponse((error as Error).message, 401);
+    return errorResponse((error as Error).message, 500);
   }
 }

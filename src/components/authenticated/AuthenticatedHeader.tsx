@@ -1,9 +1,43 @@
 "use client";
 
-import Link from "next/link";
-import { Box, Button, Container, Typography } from "@mui/material";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Box, Button, Container, Menu, MenuItem, Typography } from "@mui/material";
+import { getErrorMessage } from "@/utils/api";
+import { useAuth } from "@/context/AuthContext";
 
 export default function AuthenticatedHeader() {
+  const router = useRouter();
+  const { user } = useAuth();
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
+
+  const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setMenuAnchor(event.currentTarget);
+  };
+
+  const handleCloseMenu = () => {
+    setMenuAnchor(null);
+  };
+
+  const handleLogout = async () => {
+    handleCloseMenu();
+    setIsLoggingOut(true);
+
+    try {
+      await fetch("/api/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+    } catch (error) {
+      console.error(getErrorMessage(error, "Logout failed"));
+    } finally {
+      router.replace("/");
+      router.refresh();
+      setIsLoggingOut(false);
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -36,12 +70,32 @@ export default function AuthenticatedHeader() {
           </Typography>
         </Box>
         <Box sx={{ display: "flex", alignItems: "center", gap: 1, flexWrap: "wrap" }}>
-          <Typography variant="body2" color="primary.light">
-            _NAME_
-          </Typography>
-          <Button component={Link} href="/api/logout" variant="outlined" color="inherit" size="small">
-            Logout
+          <Button
+            color="inherit"
+            size="small"
+            onClick={handleOpenMenu}
+            disabled={isLoggingOut}
+            aria-controls={menuAnchor ? "profile-menu" : undefined}
+            aria-haspopup="menu"
+            aria-expanded={menuAnchor ? "true" : undefined}
+          >
+            <Typography variant="body2" color="primary.light" sx={{ textTransform: "none" }}>
+              {user?.name ?? "Admin"}
+            </Typography>
           </Button>
+          <Menu
+            id="profile-menu"
+            anchorEl={menuAnchor}
+            open={Boolean(menuAnchor)}
+            onClose={handleCloseMenu}
+            keepMounted
+            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+            transformOrigin={{ vertical: "top", horizontal: "right" }}
+          >
+            <MenuItem onClick={handleLogout} disabled={isLoggingOut}>
+              {isLoggingOut ? "Logging out..." : "Logout"}
+            </MenuItem>
+          </Menu>
         </Box>
       </Container>
     </Box>

@@ -1,27 +1,48 @@
 "use client";
 
 import { useState } from "react";
-import { useSearchParams } from "next/navigation";
-import { Box, Button, Card, CardContent, Chip, Typography, Alert, CircularProgress } from "@mui/material";
-import { getErrorMessage } from "@/utils/api";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Alert, Box, Button, Card, CardContent, CircularProgress, Chip, TextField, Typography } from "@mui/material";
+import { getErrorMessage, postJson } from "@/utils/api";
 import { ROUTES } from "@/utils/constants";
+import { loginSchema, LoginFormValues } from "@/utils/loginSchemas";
 
 export default function LoginPage() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const [serverError, setServerError] = useState<string | null>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const errorParam = searchParams.get("error");
   const resolvedError = errorParam ? decodeURIComponent(errorParam) : null;
 
-  const handleGoogleSignIn = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormValues>({
+    resolver: yupResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit = async (values: LoginFormValues) => {
     setServerError(null);
+    setIsSuccess(false);
     setIsSubmitting(true);
 
     try {
-      window.location.assign(ROUTES.googleSignIn);
+      await postJson<LoginFormValues, { success: boolean }>(ROUTES.signIn, values);
+      setIsSuccess(true);
+      router.replace(ROUTES.dashboard);
     } catch (error) {
-      setServerError(getErrorMessage(error, "Unable to start Google sign-in."));
+      setServerError(getErrorMessage(error, "Unable to sign in."));
+    } finally {
       setIsSubmitting(false);
     }
   };
@@ -52,7 +73,7 @@ export default function LoginPage() {
 
             <Box sx={{ display: "grid", gap: 1.25, color: "primary.light" }}>
               <Typography variant="body2">• Akses aman untuk admin dan SPV</Typography>
-              <Typography variant="body2">• Otentikasi Google dengan Authorization Code Flow + PKCE</Typography>
+              <Typography variant="body2">• Login manual dengan email dan password terenkripsi</Typography>
               <Typography variant="body2">• Dashboard terpusat untuk keputusan operasional</Typography>
             </Box>
           </Box>
@@ -63,23 +84,44 @@ export default function LoginPage() {
                 Masuk ke Admin Area
               </Typography>
               <Typography color="text.secondary">
-                Gunakan akun Google terdaftar untuk membuka akses ke area manajemen internal.
+                Gunakan email dan password akun terdaftar untuk mengakses area manajemen internal.
               </Typography>
             </Box>
 
             {serverError || resolvedError ? <Alert severity="error">{serverError ?? resolvedError}</Alert> : null}
+            {isSuccess ? <Alert severity="success">Login berhasil. Mengarahkan ke dashboard…</Alert> : null}
 
-            <Button
-              variant="contained"
-              size="large"
-              disableElevation
-              onClick={handleGoogleSignIn}
-              disabled={isSubmitting}
-              startIcon={isSubmitting ? <CircularProgress size={18} color="inherit" /> : undefined}
-              sx={{ py: 1.75 }}
-            >
-              {isSubmitting ? "Mengalihkan…" : "Masuk dengan Google"}
-            </Button>
+            <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{ display: "grid", gap: 2 }}>
+              <TextField
+                label="Email"
+                type="email"
+                autoComplete="email"
+                fullWidth
+                {...register("email")}
+                error={Boolean(errors.email)}
+                helperText={errors.email?.message}
+              />
+              <TextField
+                label="Password"
+                type="password"
+                autoComplete="current-password"
+                fullWidth
+                {...register("password")}
+                error={Boolean(errors.password)}
+                helperText={errors.password?.message}
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                size="large"
+                disableElevation
+                disabled={isSubmitting}
+                startIcon={isSubmitting ? <CircularProgress size={18} color="inherit" /> : undefined}
+                sx={{ py: 1.75 }}
+              >
+                {isSubmitting ? "Memproses…" : "Masuk"}
+              </Button>
+            </Box>
 
             <Box sx={{ pt: 2, borderTop: 1, borderColor: "divider" }}>
               <Typography variant="body2" color="text.secondary">

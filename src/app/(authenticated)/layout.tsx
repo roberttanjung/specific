@@ -1,10 +1,25 @@
 import type { ReactNode } from "react";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import AuthenticatedFooter from "@/components/authenticated/AuthenticatedFooter";
 import AuthenticatedHeader from "@/components/authenticated/AuthenticatedHeader";
 import AuthenticatedSidebar from "@/components/authenticated/AuthenticatedSidebar";
 import { Box, Container } from "@mui/material";
+import { verifyAuthToken } from "@/lib/server/auth";
 
-export default function AuthenticatedLayout({ children }: { children: ReactNode }) {
+export default async function AuthenticatedLayout({ children }: { children: ReactNode }) {
+  const appToken = (await cookies()).get("appToken")?.value;
+
+  if (!appToken) {
+    redirect("/");
+  }
+
+  try {
+    verifyAuthToken(appToken);
+  } catch {
+    redirect("/");
+  }
+
   return (
     <Box sx={{ minHeight: "100vh", bgcolor: "background.default", color: "text.primary" }}>
       <AuthenticatedHeader />

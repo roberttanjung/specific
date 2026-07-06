@@ -1,13 +1,27 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { Box, Typography } from "@mui/material";
 import type { ReactNode } from "react";
+import { verifyAuthToken } from "@/lib/server/auth";
 
 export const metadata: Metadata = {
   title: "Admin Area | Sign in",
   description: "Secure admin access to SPEcific dashboard.",
 };
 
-export default function UnauthenticatedLayout({ children }: { children: ReactNode }) {
+export default async function UnauthenticatedLayout({ children }: { children: ReactNode }) {
+  const appToken = (await cookies()).get("appToken")?.value;
+
+  if (appToken) {
+    try {
+      verifyAuthToken(appToken);
+      redirect("/dashboard");
+    } catch {
+      // Invalid token should allow access to login page.
+    }
+  }
+
   return (
     <Box
       sx={{
@@ -42,7 +56,7 @@ export default function UnauthenticatedLayout({ children }: { children: ReactNod
         </Typography>
       </Box>
 
-      <Box sx={{ width: "100%", maxWidth: 480 }}>{children}</Box>
+      <Box sx={{ width: "100%" }}>{children}</Box>
     </Box>
   );
 }
